@@ -3,1216 +3,1566 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>한승연 | Green Smart City</title>
-  <meta name="description" content="상명대학교 천안캠퍼스 그린스마트시티학과 한승연의 포트폴리오 및 자기소개 페이지입니다." />
+  <title>한승연 | Green Smart City Portfolio</title>
+  <meta name="description" content="상명대학교 천안캠퍼스 그린스마트시티학과 한승연의 포트폴리오 대시보드입니다." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --green-deep: #0d2b1a;
-      --green-dark: #143d27;
-      --green-mid: #1e5c3a;
-      --green-accent: #2ecc71;
-      --green-light: #52d68a;
-      --green-glow: #27ae60;
-      --teal: #1abc9c;
-      --white: #ffffff;
-      --off-white: #f0faf4;
-      --text-muted: #8ab8a0;
-      --card-bg: rgba(30, 92, 58, 0.25);
-      --card-border: rgba(46, 204, 113, 0.2);
-      --glass: rgba(255, 255, 255, 0.05);
+      /* ink & paper */
+      --ink:        #1A1A18;
+      --ink-2:      #262521;
+      --ink-3:      #34332E;
+      --paper:      #FFFFFF;
+      --paper-2:    #FBFAF6;
+
+      /* accent */
+      --yellow:     #F2C94C;
+      --yellow-dk:  #E3B62C;
+      --yellow-pale:#FCF0C4;
+
+      /* text */
+      --text:       #1A1A18;
+      --text-sub:   #6E6B63;
+      --text-mute:  #A6A399;
+      --on-dark:    #F5F3EC;
+      --on-dark-sub:#9C9A91;
+
+      /* lines & shadow */
+      --line:       rgba(26,26,24,0.09);
+      --line-soft:  rgba(26,26,24,0.055);
+      --line-dark:  rgba(245,243,236,0.12);
+      --sh-sm:      0 1px 2px rgba(26,26,24,0.04);
+      --sh:         0 1px 2px rgba(26,26,24,0.04), 0 10px 28px rgba(26,26,24,0.055);
+      --sh-lift:    0 2px 6px rgba(26,26,24,0.06), 0 18px 44px rgba(26,26,24,0.10);
+
+      /* geometry */
+      --r:          26px;
+      --r-sm:       18px;
+      --r-xs:       12px;
+      --pill:       999px;
+      --gap:        14px;
+      --pad:        22px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Noto Sans KR', 'Inter', sans-serif;
-      background: var(--green-deep);
-      color: var(--white);
-      overflow-x: hidden;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      color: var(--text);
       min-height: 100vh;
-    }
-
-    /* ── BACKGROUND ── */
-    .bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .bg-canvas::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      -webkit-font-smoothing: antialiased;
       background:
-        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(46,204,113,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(26,188,156,0.10) 0%, transparent 60%),
-        linear-gradient(160deg, #0a1f11 0%, #0d2b1a 40%, #091a10 100%);
+        radial-gradient(1000px 520px at 58% -10%, #FDF2C4 0%, rgba(253,242,196,0) 62%),
+        radial-gradient(760px 460px at 97% 4%,  #FBEBCB 0%, rgba(251,235,203,0) 60%),
+        radial-gradient(700px 500px at 2% 12%,  #FFFFFF 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, #FAF8F1 0%, #F1F0EA 48%, #EDECE6 100%);
+      background-attachment: fixed;
+      padding-bottom: 3rem;
     }
 
-    .particles {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(14px, 2.2vw, 30px);
     }
 
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0;
-      animation: float-up var(--dur, 8s) var(--delay, 0s) infinite ease-in-out;
+    /* ─────────────────────────  NAV  ───────────────────────── */
+    .nav-outer {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      padding: 14px 0 8px;
     }
-
-    @keyframes float-up {
-      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
-      10%  { opacity: var(--op, 0.4); }
-      90%  { opacity: var(--op, 0.4); }
-      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+    .nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(13, 43, 26, 0.7);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(46,204,113,0.12);
-      transition: all 0.3s ease;
+      gap: 12px;
     }
 
-    .nav-logo {
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--green-accent);
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px 9px 12px;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: var(--pill);
       text-decoration: none;
-    }
-    .nav-logo span { color: var(--white); }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      transition: color 0.3s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1.5px;
-      background: var(--green-accent);
-      transition: width 0.3s;
-    }
-
-    .nav-links a:hover { color: var(--green-accent); }
-    .nav-links a:hover::after { width: 100%; }
-
-    /* ── HERO ── */
-    #hero {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6rem 2rem 4rem;
-      text-align: center;
-    }
-
-    .hero-inner { max-width: 800px; }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(46,204,113,0.12);
-      border: 1px solid rgba(46,204,113,0.3);
-      border-radius: 999px;
-      padding: 0.4rem 1.2rem;
-      font-size: 0.8rem;
-      color: var(--green-light);
-      letter-spacing: 0.08em;
-      font-weight: 500;
-      margin-bottom: 2rem;
-      animation: fade-in 0.8s ease both;
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green-accent);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(1.4); }
-    }
-
-    .hero-name {
-      font-size: clamp(3.5rem, 9vw, 7rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #ffffff 30%, var(--green-light) 70%, var(--teal) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fade-up 0.9s 0.15s ease both;
-    }
-
-    .hero-en {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      font-weight: 300;
-      color: var(--text-muted);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-      animation: fade-up 0.9s 0.25s ease both;
-    }
-
-    .hero-divider {
-      width: 60px; height: 2px;
-      background: linear-gradient(90deg, var(--green-accent), var(--teal));
-      margin: 1.8rem auto;
-      border-radius: 2px;
-      animation: expand 0.9s 0.35s ease both;
-    }
-
-    @keyframes expand {
-      from { width: 0; opacity: 0; }
-      to   { width: 60px; opacity: 1; }
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      color: var(--text-muted);
-      line-height: 1.8;
-      font-weight: 300;
-      animation: fade-up 0.9s 0.45s ease both;
-    }
-    .hero-subtitle strong { color: var(--green-light); font-weight: 500; }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2.5rem;
-      animation: fade-up 0.9s 0.55s ease both;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.9rem 2rem;
-      border-radius: 999px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--green-accent), var(--teal));
-      color: var(--green-deep);
-      border: none;
-      box-shadow: 0 0 30px rgba(46,204,113,0.35);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 45px rgba(46,204,113,0.55);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--green-light);
-      border: 1.5px solid rgba(46,204,113,0.4);
-    }
-    .btn-outline:hover {
-      background: rgba(46,204,113,0.08);
-      border-color: var(--green-accent);
-      transform: translateY(-2px);
-    }
-
-    /* ── SCROLL INDICATOR ── */
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      animation: fade-in 1s 1.2s ease both;
-    }
-
-    .scroll-hint-line {
-      width: 1.5px; height: 40px;
-      background: linear-gradient(to bottom, var(--green-accent), transparent);
-      animation: scroll-line 2s infinite;
-    }
-
-    @keyframes scroll-line {
-      0%   { transform: scaleY(0); transform-origin: top; }
-      50%  { transform: scaleY(1); transform-origin: top; }
-      51%  { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 6rem 2rem;
-    }
-
-    .container { max-width: 1100px; margin: 0 auto; }
-
-    .section-header { text-align: center; margin-bottom: 4rem; }
-
-    .section-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--green-accent);
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #fff 50%, var(--green-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* ── ABOUT ── */
-    #about {
-      background: linear-gradient(180deg, transparent, rgba(20,61,39,0.3), transparent);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .about-visual { display: flex; justify-content: center; }
-
-    .avatar-ring {
-      position: relative;
-      width: 260px; height: 260px;
-    }
-
-    .avatar-ring::before, .avatar-ring::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      animation: spin-ring 8s linear infinite;
-    }
-
-    .avatar-ring::before {
-      inset: -8px;
-      border: 2px solid transparent;
-      background: linear-gradient(var(--green-deep), var(--green-deep)) padding-box,
-                  linear-gradient(135deg, var(--green-accent), transparent, var(--teal)) border-box;
-    }
-
-    .avatar-ring::after {
-      inset: -20px;
-      border: 1px solid transparent;
-      background: linear-gradient(var(--green-deep), var(--green-deep)) padding-box,
-                  linear-gradient(225deg, var(--green-accent), transparent, var(--teal)) border-box;
-      animation-duration: 12s;
-      animation-direction: reverse;
-    }
-
-    @keyframes spin-ring {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    .avatar-core {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6rem;
-      font-weight: 900;
-      color: var(--green-accent);
-      letter-spacing: -0.05em;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 0 60px rgba(46,204,113,0.2), inset 0 0 40px rgba(0,0,0,0.3);
-    }
-
-    .about-info h3 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      color: var(--white);
-    }
-
-    .about-info p {
-      color: var(--text-muted);
-      line-height: 1.9;
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-      font-weight: 300;
-    }
-
-    .info-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      list-style: none;
-    }
-
-    .info-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .info-list .label {
-      min-width: 80px;
-      color: var(--green-accent);
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      padding-top: 1px;
-    }
-
-    .info-list .value {
-      color: var(--off-white);
-      font-weight: 400;
-      line-height: 1.5;
-    }
-
-    /* ── EDUCATION ── */
-    #education { padding-top: 4rem; }
-
-    .timeline {
-      position: relative;
-      padding-left: 2.5rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 9px; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--green-accent), var(--teal), transparent);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2.5rem;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -2.5rem;
-      top: 0.4rem;
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: var(--green-deep);
-      border: 2.5px solid var(--green-accent);
-      box-shadow: 0 0 12px rgba(46,204,113,0.4);
-      transition: all 0.3s;
-    }
-
-    .timeline-item:hover .timeline-dot {
-      background: var(--green-accent);
-      box-shadow: 0 0 20px rgba(46,204,113,0.7);
-    }
-
-    .timeline-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.5rem 2rem;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .timeline-card:hover {
-      border-color: rgba(46,204,113,0.45);
-      transform: translateX(5px);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-    }
-
-    .timeline-period {
-      font-size: 0.75rem;
-      color: var(--green-accent);
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.4rem;
-    }
-
-    .timeline-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 300;
-    }
-
-    /* ── ACHIEVEMENTS ── */
-    #achievements {
-      background: linear-gradient(180deg, transparent, rgba(20,61,39,0.2), transparent);
-    }
-
-    .awards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .award-card {
-      background: var(--glass);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 2rem 1.8rem;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(12px);
-      transition: all 0.35s ease;
-      cursor: default;
-    }
-
-    .award-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(46,204,113,0.08) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .award-card:hover {
-      border-color: rgba(46,204,113,0.5);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(46,204,113,0.1);
-    }
-
-    .award-card:hover::before { opacity: 1; }
-
-    .award-icon { font-size: 2.4rem; margin-bottom: 1rem; }
-
-    /* ── AWARD IMAGE ── */
-    .award-img-wrap {
-      width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 1.2rem;
-      aspect-ratio: 16 / 10;
-      cursor: pointer;
-      position: relative;
-      background: rgba(20,61,39,0.4);
-    }
-
-    .award-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .award-img-wrap:hover img { transform: scale(1.04); }
-
-    .award-img-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(13,43,26,0.75) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: 1rem;
-      gap: 0.4rem;
-      font-size: 0.82rem;
-      color: #fff;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-    .award-img-wrap:hover .award-img-overlay { opacity: 1; }
-
-    /* ── LIGHTBOX ── */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(12px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #lightbox.open { display: flex; }
-
-    .lb-toolbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
-      z-index: 2;
-    }
-
-    .lb-caption {
-      font-size: 0.9rem;
-      color: var(--green-light);
-      font-weight: 500;
-    }
-
-    .lb-btn {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      border-radius: 8px;
-      padding: 0.45rem 1rem;
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .lb-btn:hover { background: rgba(255,255,255,0.18); }
-
-    .lb-close-btn {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      border-radius: 8px;
-      padding: 0.45rem 0.9rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-      line-height: 1;
-    }
-
-    .lb-close-btn:hover { background: rgba(220,50,50,0.4); }
-
-    .lb-viewport {
-      width: 100vw;
-      height: 100vh;
-      overflow: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: grab;
-    }
-
-    .lb-viewport.grabbing { cursor: grabbing; }
-
-    #lb-img {
-      max-width: none;
-      display: block;
-      border-radius: 8px;
-      box-shadow: 0 0 60px rgba(0,0,0,0.8);
-      transition: opacity 0.3s ease;
-      transform-origin: center;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-
-    #lb-img.loading { opacity: 0; }
-
-    .lb-spinner {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 44px; height: 44px;
-      border: 3px solid rgba(46,204,113,0.2);
-      border-top-color: var(--green-accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      display: none;
-    }
-
-    #lightbox.loading-state .lb-spinner { display: block; }
-
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    .lb-zoom-bar {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 999px;
-      padding: 0.5rem 1.2rem;
-      backdrop-filter: blur(8px);
-    }
-
-    .lb-zoom-bar button {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.1rem;
-      cursor: pointer;
+      color: var(--text);
+      flex-shrink: 0;
+      box-shadow: var(--sh-sm);
+      transition: box-shadow .22s ease, transform .22s ease;
+    }
+    .brand:hover { box-shadow: var(--sh); transform: translateY(-1px); }
+    .brand-mark {
       width: 28px; height: 28px;
       border-radius: 50%;
-      transition: background 0.2s;
+      background: var(--ink);
+      color: var(--yellow);
+      display: grid; place-items: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .brand-name {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-bar {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: var(--pill);
+      box-shadow: var(--sh-sm);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-bar::-webkit-scrollbar { display: none; }
+
+    .nav-btn {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.855rem;
+      font-weight: 500;
+      color: var(--text-sub);
+      background: transparent;
+      border: none;
+      border-radius: var(--pill);
+      padding: 9px 17px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-btn:hover { background: rgba(26,26,24,0.05); color: var(--text); }
+    .nav-btn.active { background: var(--ink); color: #fff; }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+      padding-left: 6px;
+      flex-shrink: 0;
+    }
+    .nav-sep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+    .tool-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      display: grid; place-items: center;
+      cursor: pointer;
+      font-size: 0.92rem;
+      color: var(--text-sub);
+      transition: background .2s ease;
+      flex-shrink: 0;
+    }
+    .tool-btn:hover { background: rgba(26,26,24,0.06); }
+    .tool-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--yellow);
+      display: grid; place-items: center;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────  HERO  ───────────────────────── */
+    .hero { padding: 34px 4px 26px; }
+    .hero-eyebrow {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-mute);
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: clamp(2.1rem, 5.2vw, 3.75rem);
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+      color: var(--text);
+    }
+    .hero-title b { font-weight: 600; }
+
+    /* ─────────────────────  STAT STRIP  ───────────────────── */
+    .strip {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: clamp(20px, 4vw, 64px);
+      flex-wrap: wrap;
+      padding: 6px 4px 30px;
+    }
+
+    .meters { flex: 0 1 540px; min-width: 280px; }
+    .meter-set { display: flex; gap: 8px; align-items: flex-end; }
+    .meter-col {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      flex-shrink: 0;
+    }
+    .meter-col.grow { flex: 1 1 auto; min-width: 88px; max-width: 210px; }
+    .meter-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--text-sub);
+      letter-spacing: 0.01em;
+      padding-left: 3px;
+    }
+    .meter {
+      height: 38px;
+      border-radius: var(--pill);
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      flex-shrink: 0;
+    }
+    .m-ink   { background: var(--ink);   color: #fff;      width: 86px; }
+    .m-yel   { background: var(--yellow);color: var(--ink);width: 66px; }
+    .m-hatch {
+      width: 100%;
+      border: 1px solid var(--line);
+      color: var(--text-sub);
+      background-color: rgba(255,255,255,0.35);
+      background-image: repeating-linear-gradient(112deg,
+        rgba(26,26,24,0.15) 0 1.6px, transparent 1.6px 8px);
+    }
+    .m-out {
+      width: 62px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+      color: var(--text);
+    }
+
+    .bignums {
+      display: flex;
+      gap: clamp(20px, 3.4vw, 46px);
+      flex-wrap: wrap;
+    }
+    .bignum-val {
+      font-size: clamp(2.1rem, 4.4vw, 3.3rem);
+      font-weight: 400;
+      letter-spacing: -0.055em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .bignum-key {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 7px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: var(--text-sub);
+    }
+    .bignum-key i { font-style: normal; font-size: 0.8rem; opacity: 0.65; }
+
+    /* ─────────────────────  BENTO GRID  ───────────────────── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+    }
+    .s3 { grid-column: span 3; }
+    .s4 { grid-column: span 4; }
+    .s5 { grid-column: span 5; }
+    .s8 { grid-column: span 8; }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r);
+      padding: var(--pad);
+      box-shadow: var(--sh);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .card-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.76rem;
+      color: var(--text-mute);
+      font-weight: 400;
+    }
+    .go {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: transparent;
+      display: grid; place-items: center;
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .2s, color .2s, transform .2s;
+      text-decoration: none;
+    }
+    .go:hover { background: var(--ink); color: #fff; transform: rotate(45deg); }
+
+    /* ── profile card (dark) ── */
+    .card-profile {
+      background:
+        radial-gradient(420px 300px at 78% 6%, rgba(242,201,76,0.20) 0%, rgba(242,201,76,0) 62%),
+        linear-gradient(165deg, #2E3A31 0%, #22271F 46%, #1A1A18 100%);
+      border-color: transparent;
+      color: var(--on-dark);
+      position: relative;
+      overflow: hidden;
+      min-height: 330px;
+      justify-content: flex-end;
+    }
+    .profile-mono {
+      position: absolute;
+      right: -14px; top: -34px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 12rem;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(245,243,236,0.055);
+      letter-spacing: -0.06em;
+      pointer-events: none;
+      user-select: none;
+    }
+    .profile-tag {
+      position: absolute;
+      top: var(--pad); left: var(--pad);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .profile-name {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.62rem;
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .profile-badge {
+      background: var(--yellow);
+      color: var(--ink);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: var(--pill);
+      letter-spacing: -0.01em;
+    }
+    .profile-role {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.86rem;
+      color: var(--on-dark);
+      opacity: 0.9;
+      margin-top: 9px;
+    }
+    .profile-school {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.76rem;
+      color: var(--on-dark-sub);
+      margin-top: 3px;
+    }
+    .profile-mail {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-start;
+      padding: 9px 15px;
+      border-radius: var(--pill);
+      border: 1px solid var(--line-dark);
+      background: rgba(245,243,236,0.06);
+      color: var(--on-dark);
+      font-size: 0.76rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .profile-mail:hover { background: rgba(245,243,236,0.13); border-color: rgba(245,243,236,0.28); }
+
+    /* ── timeline card ── */
+    .tl-metric {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+    .tl-num {
+      font-size: 2.7rem;
+      font-weight: 400;
+      letter-spacing: -0.055em;
+      line-height: 1;
+    }
+    .tl-note {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.76rem;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+    .tl-list { position: relative; padding-left: 4px; }
+    .tl-item {
+      display: flex;
+      gap: 13px;
+      padding: 9px 0;
+      position: relative;
+    }
+    .tl-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 5px; top: 22px; bottom: -4px;
+      width: 1px;
+      background: var(--line);
+    }
+    .tl-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--text-mute);
+      margin-top: 5px;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .tl-dot.on { background: var(--yellow); border-color: var(--yellow); }
+    .tl-dot.ink { background: var(--ink); border-color: var(--ink); }
+    .tl-text {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.84rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+    .tl-text b { color: var(--text); font-weight: 600; }
+    .tl-year {
+      font-size: 0.71rem;
+      color: var(--text-mute);
+      margin-top: 2px;
+    }
+
+    /* ── dark quick-access card ── */
+    .card-dark {
+      background: var(--ink);
+      border-color: transparent;
+      color: var(--on-dark);
+    }
+    .card-dark .card-title { color: var(--on-dark); }
+    .card-count {
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: var(--on-dark);
+    }
+    .card-count span { color: var(--on-dark-sub); }
+    .qa-list { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; }
+    .qa {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      border-radius: var(--r-xs);
+      padding: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s ease;
+    }
+    .qa:hover { background: rgba(245,243,236,0.07); }
+    .qa.active { background: rgba(245,243,236,0.11); }
+    .qa-ic {
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: rgba(245,243,236,0.09);
+      display: grid; place-items: center;
+      font-size: 0.88rem;
+      flex-shrink: 0;
+    }
+    .qa-body { flex: 1; min-width: 0; }
+    .qa-name {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--on-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .qa-meta {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.7rem;
+      color: var(--on-dark-sub);
+      margin-top: 2px;
+    }
+    .qa-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 0.62rem;
+      flex-shrink: 0;
+      background: rgba(245,243,236,0.13);
+      color: transparent;
+    }
+    .qa-check.done { background: var(--yellow); color: var(--ink); }
+
+    /* ── project cards ── */
+    .card-proj { padding: 12px; cursor: pointer; }
+    .card-proj:hover { box-shadow: var(--sh-lift); transform: translateY(-2px); }
+    .proj-shot {
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      background: var(--paper-2);
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+    .proj-shot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s cubic-bezier(.2,.7,.3,1);
+    }
+    .card-proj:hover .proj-shot img { transform: scale(1.045); }
+    .proj-zoom {
+      position: absolute;
+      right: 10px; bottom: 10px;
+      background: rgba(26,26,24,0.72);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      border: none;
+      border-radius: var(--pill);
+      padding: 7px 13px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity .25s, transform .25s;
+    }
+    .card-proj:hover .proj-zoom { opacity: 1; transform: translateY(0); }
+    .proj-body { padding: 14px 10px 8px; }
+    .proj-name {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+    .proj-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.79rem;
+      color: var(--text-sub);
+      line-height: 1.6;
+      margin-top: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── yellow contact card ── */
+    .card-yellow {
+      background: var(--yellow);
+      border-color: transparent;
+      justify-content: space-between;
+      min-height: 230px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-yellow::after {
+      content: '';
+      position: absolute;
+      right: -70px; bottom: -90px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.28);
+    }
+    .cy-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(26,26,24,0.6);
+    }
+    .cy-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.25;
+      margin-top: 12px;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+    .cy-info { margin-top: 20px; position: relative; z-index: 1; }
+    .cy-info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 0;
+      border-top: 1px solid rgba(26,26,24,0.15);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.755rem;
+    }
+    .cy-info-row .k { color: rgba(26,26,24,0.55); flex-shrink: 0; }
+    .cy-info-row .v { color: var(--ink); font-weight: 500; text-align: right; }
+
+    .cy-mail {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+      text-decoration: none;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+    .cy-mail-text {
+      font-size: 0.86rem;
+      font-weight: 500;
+      word-break: break-all;
+    }
+    .cy-arrow {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--yellow);
+      display: grid; place-items: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform .25s ease;
+    }
+    .cy-mail:hover .cy-arrow { transform: rotate(45deg) scale(1.06); }
+
+    /* ── list card ── */
+    .filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 16px 0 6px;
+    }
+    .fchip {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.765rem;
+      font-weight: 500;
+      color: var(--text-sub);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: var(--pill);
+      padding: 7px 14px;
+      cursor: pointer;
+      transition: all .18s ease;
+      white-space: nowrap;
+    }
+    .fchip:hover { border-color: rgba(26,26,24,0.22); color: var(--text); }
+    .fchip.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .fchip.tag::before { content: '#'; opacity: 0.45; margin-right: 3px; }
+
+    .list { display: flex; flex-direction: column; margin-top: 10px; }
+    .lrow {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      border-top: 1px solid var(--line-soft);
+      padding: 13px 10px;
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: var(--r-xs);
+      transition: background .18s ease;
+    }
+    .lrow:hover { background: var(--paper-2); }
+    .lrow.on { background: var(--yellow-pale); }
+    .lrow-ic {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--paper-2);
+      border: 1px solid var(--line-soft);
+      display: grid; place-items: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .lrow.on .lrow-ic { background: #fff; border-color: rgba(26,26,24,0.1); }
+    .lrow-main { flex: 1; min-width: 0; }
+    .lrow-name {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .lrow-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.735rem;
+      color: var(--text-mute);
+      margin-top: 2px;
+      display: block;
+    }
+    .chip {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.705rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: var(--pill);
+      white-space: nowrap;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      color: var(--text-sub);
+    }
+    .chip-gold { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+    .chip-ink  { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .lrow-go {
+      font-size: 0.78rem;
+      color: var(--text-mute);
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity .18s;
+    }
+    .lrow:hover .lrow-go, .lrow.on .lrow-go { opacity: 1; }
+    .list-empty {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-mute);
+      text-align: center;
+      padding: 34px 0;
+    }
+
+    /* ── detail card ── */
+    .card-detail { position: sticky; top: 78px; align-self: start; }
+    .dt-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1.16rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.35;
+      margin-top: 12px;
+    }
+    .dt-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      line-height: 1.75;
+      margin-top: 10px;
+    }
+    .dt-meta { margin-top: 16px; border-top: 1px solid var(--line-soft); }
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.79rem;
+    }
+    .info-row .label { color: var(--text-mute); }
+    .info-row .value { color: var(--text); font-weight: 500; }
+    .tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .tag {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-sub);
+      background: var(--paper-2);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--pill);
+      padding: 5px 11px;
+    }
+    .tag::before { content: '#'; opacity: 0.4; margin-right: 2px; }
+    .dt-thumb {
+      margin-top: 16px;
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--line-soft);
+      position: relative;
+    }
+    .dt-thumb img { width: 100%; display: block; }
+    .dt-hint {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.7rem;
+      color: var(--text-mute);
+      text-align: center;
+      margin-top: 7px;
+    }
+
+    /* ─────────────────────  LIGHTBOX  ───────────────────── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(18,18,16,0.96);
+      backdrop-filter: blur(6px);
+      z-index: 900;
+      display: none;
+      flex-direction: column;
+    }
+    #lightbox.open { display: flex; }
+    .lb-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px clamp(14px, 3vw, 30px);
+      flex-shrink: 0;
+    }
+    .lb-caption {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(245,243,236,0.72);
+    }
+    .lb-close-btn {
+      background: rgba(245,243,236,0.1);
+      border: 1px solid rgba(245,243,236,0.16);
+      color: var(--on-dark);
+      border-radius: var(--pill);
+      padding: 9px 17px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .lb-close-btn:hover { background: rgba(245,243,236,0.2); }
+    .lb-viewport {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      display: flex;
+      padding: 0 clamp(14px, 3vw, 30px) 12px;
+      cursor: grab;
+      overscroll-behavior: contain;
+    }
+    .lb-viewport.dragging { cursor: grabbing; }
+    /* margin:auto centres the image while it fits, and — unlike
+       justify/align-content:center — keeps the overflow reachable once zoomed in. */
+    #lb-img {
+      margin: auto;
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 14px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+    #lb-img.loading { opacity: 0.25; }
+    .lb-zoom-bar {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
+      padding: 0 0 22px;
+      flex-shrink: 0;
     }
-
-    .lb-zoom-bar button:hover { background: rgba(255,255,255,0.15); }
-
-    #lb-zoom-pct {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      min-width: 44px;
-      text-align: center;
-    }
-
-    .award-year {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      color: var(--green-accent);
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-
-    .award-title {
+    .lb-zoom-bar button {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(245,243,236,0.1);
+      border: 1px solid rgba(245,243,236,0.16);
+      color: var(--on-dark);
       font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .lb-zoom-bar button:hover { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+    #lb-zoom-pct {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(245,243,236,0.72);
+      min-width: 76px;
+      height: 38px;
+      padding: 0 14px;
+      border-radius: var(--pill);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    #lb-zoom-pct:hover {
+      background: rgba(245,243,236,0.1);
+      border-color: rgba(245,243,236,0.16);
+      color: var(--on-dark);
     }
 
-    .award-desc {
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      line-height: 1.6;
-    }
-
-    .award-badge {
-      display: inline-block;
-      margin-top: 1.2rem;
-      padding: 0.3rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
-    .badge-gold {
-      background: rgba(255, 215, 0, 0.12);
-      color: #ffd700;
-      border: 1px solid rgba(255,215,0,0.3);
-    }
-
-    .badge-green {
-      background: rgba(46,204,113,0.12);
-      color: var(--green-light);
-      border: 1px solid rgba(46,204,113,0.3);
-    }
-
-    .badge-leader {
-      background: rgba(26,188,156,0.15);
-      color: #1abc9c;
-      border: 1px solid rgba(26,188,156,0.4);
-    }
-
-    /* ── VISION ── */
-    #vision { padding-bottom: 8rem; }
-
-    .vision-card {
-      background: linear-gradient(135deg, rgba(30,92,58,0.4), rgba(13,43,26,0.6));
-      border: 1px solid rgba(46,204,113,0.25);
-      border-radius: 28px;
-      padding: 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(15px);
-    }
-
-    .vision-card::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: 50%;
-      transform: translateX(-50%);
-      width: 500px; height: 300px;
-      background: radial-gradient(ellipse, rgba(46,204,113,0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .vision-icon { font-size: 3.5rem; margin-bottom: 1.5rem; }
-
-    .vision-card h3 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 1.2rem;
-      background: linear-gradient(135deg, #fff, var(--green-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .vision-card p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 2;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      font-weight: 300;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2.5rem;
-      border-top: 1px solid rgba(46,204,113,0.1);
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-    }
-
-    footer span { color: var(--green-accent); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(30px); }
+    /* ─────────────────────  MOTION  ───────────────────── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    .rise { animation: rise .6s cubic-bezier(.2,.7,.3,1) both; }
+    .d1 { animation-delay: .05s; }
+    .d2 { animation-delay: .11s; }
+    .d3 { animation-delay: .17s; }
+    .d4 { animation-delay: .23s; }
+    .d5 { animation-delay: .29s; }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+    @media (prefers-reduced-motion: reduce) {
+      .rise { animation: none; }
+      * { transition: none !important; }
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
+    /* ─────────────────────  RESPONSIVE  ───────────────────── */
+    @media (max-width: 1100px) {
+      .s3, .s4 { grid-column: span 6; }
+      .s5, .s8 { grid-column: span 12; }
+      .card-detail { position: static; }
     }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .about-grid { grid-template-columns: 1fr; text-align: center; }
-      .about-visual { margin-bottom: 2rem; }
-      .avatar-ring { width: 200px; height: 200px; }
-      .vision-card { padding: 2.5rem 1.5rem; }
+    @media (max-width: 720px) {
+      :root { --pad: 18px; --r: 22px; }
+      .s3, .s4, .s5, .s8 { grid-column: span 12; }
+      .brand-name { display: none; }
+      .brand { padding: 9px 12px; }
+      .tool-btn, .nav-sep { display: none; }
+      .nav-tools {
+        position: sticky;
+        right: -6px;
+        padding-left: 14px;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff 40%);
+      }
+      .hero { padding: 26px 2px 20px; }
+      .strip { gap: 26px; padding-bottom: 24px; }
+      .meters { flex: 1 1 100%; }
+      .profile-mono { font-size: 9rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Background -->
-<div class="bg-canvas">
-  <div class="particles" id="particles"></div>
+<div class="wrap">
+
+  <!-- ───────────────  NAV  ─────────────── -->
+  <div class="nav-outer">
+    <nav class="nav">
+      <a href="#" class="brand">
+        <span class="brand-mark">🌿</span>
+        <span class="brand-name">한승연</span>
+      </a>
+
+      <div class="nav-bar">
+        <button class="nav-btn active" id="nav-all" onclick="filterCategory('all')">포트폴리오</button>
+        <button class="nav-btn" id="nav-award" onclick="filterCategory('award')">수상</button>
+        <button class="nav-btn" id="nav-project" onclick="filterCategory('project')">프로젝트</button>
+        <button class="nav-btn" id="nav-activity" onclick="filterCategory('activity')">활동</button>
+        <button class="nav-btn" onclick="scrollToContact()">연락처</button>
+
+        <div class="nav-tools">
+          <button class="tool-btn" title="검색">🔍</button>
+          <button class="tool-btn" title="알림">🔔</button>
+          <div class="nav-sep"></div>
+          <div class="tool-avatar" title="한승연">승</div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ───────────────  HERO  ─────────────── -->
+  <header class="hero rise">
+    <p class="hero-eyebrow">상명대학교 천안캠퍼스 · 그린스마트시티학과</p>
+    <h1 class="hero-title">한승연의 <b>포트폴리오</b></h1>
+  </header>
+
+  <!-- ───────────────  STAT STRIP  ─────────────── -->
+  <section class="strip rise d1">
+    <div class="meters">
+      <div class="meter-set">
+        <div class="meter-col">
+          <span class="meter-label">수상</span>
+          <div class="meter m-ink">3</div>
+        </div>
+        <div class="meter-col">
+          <span class="meter-label">프로젝트</span>
+          <div class="meter m-yel">2</div>
+        </div>
+        <div class="meter-col grow">
+          <span class="meter-label">수료</span>
+          <div class="meter m-hatch">1</div>
+        </div>
+        <div class="meter-col">
+          <span class="meter-label">임명</span>
+          <div class="meter m-out">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bignums">
+      <div>
+        <div class="bignum-val">3</div>
+        <div class="bignum-key"><i>⭐</i>수상</div>
+      </div>
+      <div>
+        <div class="bignum-val">2</div>
+        <div class="bignum-key"><i>📁</i>프로젝트</div>
+      </div>
+      <div>
+        <div class="bignum-val">6</div>
+        <div class="bignum-key"><i>📋</i>전체 활동</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────  BENTO ROW 1  ─────────────── -->
+  <section class="bento" style="margin-bottom:14px;">
+
+    <!-- profile -->
+    <article class="card card-profile s3 rise d1">
+      <div class="profile-mono">승</div>
+      <div class="profile-tag">Green Smart City</div>
+      <div class="profile-name">
+        한승연
+        <span class="profile-badge">24학번</span>
+      </div>
+      <div class="profile-role">그린스마트시티학과 부학회장</div>
+      <div class="profile-school">상명대학교 천안캠퍼스</div>
+      <a href="mailto:mos2005@naver.com" class="profile-mail">✉️ 연락하기</a>
+    </article>
+
+    <!-- timeline -->
+    <article class="card s5 rise d2">
+      <div class="card-head">
+        <div class="card-title">활동 기록</div>
+        <span class="card-sub">2025 — 2026</span>
+      </div>
+      <div class="tl-metric">
+        <span class="tl-num">6</span>
+        <span class="tl-note">건의 수상 · 프로젝트 · 활동<br/>기록이 누적되었습니다</span>
+      </div>
+      <div class="tl-list">
+        <div class="tl-item">
+          <div class="tl-dot on"></div>
+          <div>
+            <div class="tl-text"><b>Summer School</b> 수료 완료</div>
+            <div class="tl-year">2026</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot ink"></div>
+          <div>
+            <div class="tl-text"><b>춘계학술대회</b> 대상 수상</div>
+            <div class="tl-year">2026</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot ink"></div>
+          <div>
+            <div class="tl-text">그린스마트시티학과 <b>부학회장</b> 임명</div>
+            <div class="tl-year">2026</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot on"></div>
+          <div>
+            <div class="tl-text"><b>도시숲 공모전</b> 「품앗이」 출품</div>
+            <div class="tl-year">2026</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot ink"></div>
+          <div>
+            <div class="tl-text">교내공모전 <b>대상</b> 수상</div>
+            <div class="tl-year">2025</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- quick access (dark) -->
+    <article class="card card-dark s4 rise d3">
+      <div class="card-head">
+        <div class="card-title">빠른 접근</div>
+        <div class="card-count">4<span>/6</span></div>
+      </div>
+      <div class="qa-list">
+        <button class="qa" id="qa-award-1" onclick="selectItem('award-1')">
+          <span class="qa-ic">🏆</span>
+          <span class="qa-body">
+            <span class="qa-name">교내공모전</span>
+            <span class="qa-meta">대상 · 2025</span>
+          </span>
+          <span class="qa-check done">✓</span>
+        </button>
+        <button class="qa" id="qa-award-3" onclick="selectItem('award-3')">
+          <span class="qa-ic">🎓</span>
+          <span class="qa-body">
+            <span class="qa-name">춘계학술대회</span>
+            <span class="qa-meta">대상 · 2026</span>
+          </span>
+          <span class="qa-check done">✓</span>
+        </button>
+        <button class="qa" id="qa-award-4" onclick="selectItem('award-4')">
+          <span class="qa-ic">🌳</span>
+          <span class="qa-body">
+            <span class="qa-name">도시숲 공모전</span>
+            <span class="qa-meta">참가 · 2026</span>
+          </span>
+          <span class="qa-check"></span>
+        </button>
+        <button class="qa" id="qa-award-2" onclick="selectItem('award-2')">
+          <span class="qa-ic">👑</span>
+          <span class="qa-body">
+            <span class="qa-name">부학회장</span>
+            <span class="qa-meta">임명 · 2026</span>
+          </span>
+          <span class="qa-check"></span>
+        </button>
+      </div>
+    </article>
+  </section>
+
+  <!-- ───────────────  BENTO ROW 2  ─────────────── -->
+  <section class="bento" style="margin-bottom:14px;">
+
+    <article class="card card-proj s5 rise d2" onclick="selectItem('award-4')">
+      <div class="proj-shot">
+        <img src="도시숲_thumb.jpg" alt="도시숲설계공모대전 품앗이 출품작" loading="lazy" />
+        <button class="proj-zoom" onclick="event.stopPropagation();openLightbox('도시숲_full.jpg','2026 도시숲설계공모대전 · 품앗이 팀 출품작')">⤢ 크게 보기</button>
+      </div>
+      <div class="proj-body">
+        <div class="card-head">
+          <div class="proj-name">도시숲 공모전 「품앗이」</div>
+          <span class="chip">2026</span>
+        </div>
+        <p class="proj-desc">도시와 숲, 사람의 품이 이어지는 지속 가능한 도시숲 설계안을 제안하였습니다.</p>
+      </div>
+    </article>
+
+    <article class="card card-proj s4 rise d3" onclick="selectItem('award-5')">
+      <div class="proj-shot">
+        <img src="스마트공원_thumb.jpg" alt="스마트공원 판넬 수업 프로젝트" loading="lazy" />
+        <button class="proj-zoom" onclick="event.stopPropagation();openLightbox('스마트공원_full.jpg','스마트공원 판넬 · 수업 프로젝트')">⤢ 크게 보기</button>
+      </div>
+      <div class="proj-body">
+        <div class="card-head">
+          <div class="proj-name">스마트공원 「명동[明動]」</div>
+          <span class="chip">수업</span>
+        </div>
+        <p class="proj-desc">사람들의 발걸음으로 다시금 천안길을 밝히다. 팀원들과 함께 제작한 스마트공원 설계안입니다.</p>
+      </div>
+    </article>
+
+    <article class="card card-yellow s3 rise d4" id="contact-section">
+      <div>
+        <div class="cy-label">Contact</div>
+        <div class="cy-title">함께 만들<br/>기회를 찾고<br/>있습니다</div>
+        <div class="cy-info">
+          <div class="cy-info-row"><span class="k">이름</span><span class="v">한승연</span></div>
+          <div class="cy-info-row"><span class="k">학과</span><span class="v">그린스마트시티학과</span></div>
+          <div class="cy-info-row"><span class="k">소속</span><span class="v">상명대 천안캠퍼스 · 24학번</span></div>
+          <div class="cy-info-row"><span class="k">직책</span><span class="v">학생회 부학회장</span></div>
+        </div>
+      </div>
+      <a href="mailto:mos2005@naver.com" class="cy-mail">
+        <span class="cy-mail-text">mos2005@naver.com</span>
+        <span class="cy-arrow">↗</span>
+      </a>
+    </article>
+  </section>
+
+  <!-- ───────────────  BENTO ROW 3  ─────────────── -->
+  <section class="bento">
+
+    <article class="card s8 rise d3">
+      <div class="card-head">
+        <div>
+          <div class="card-title">전체 내역</div>
+          <div class="card-sub" id="list-sub" style="margin-top:3px;">전체 활동 · 6건</div>
+        </div>
+        <a href="mailto:mos2005@naver.com" class="go" title="연락하기">↗</a>
+      </div>
+
+      <div class="filters">
+        <button class="fchip active" id="f-all" onclick="filterCategory('all')">전체</button>
+        <button class="fchip" id="f-recent" onclick="filterCategory('recent')">최근</button>
+        <button class="fchip" id="f-award" onclick="filterCategory('award')">수상</button>
+        <button class="fchip" id="f-project" onclick="filterCategory('project')">프로젝트</button>
+        <button class="fchip" id="f-activity" onclick="filterCategory('activity')">활동</button>
+        <button class="fchip tag" id="t-도시숲" onclick="filterTag('도시숲')">도시숲</button>
+        <button class="fchip tag" id="t-설계" onclick="filterTag('설계')">설계</button>
+        <button class="fchip tag" id="t-수상" onclick="filterTag('수상')">수상</button>
+      </div>
+
+      <div class="list" id="list"></div>
+    </article>
+
+    <article class="card card-detail s4 rise d4">
+      <div class="card-head">
+        <div class="card-title">상세 정보</div>
+        <span class="card-sub" id="dt-cat">—</span>
+      </div>
+      <div class="dt-title" id="dt-title">항목을 선택해 주세요</div>
+      <div class="dt-desc" id="dt-desc">왼쪽 목록이나 위쪽 카드에서 항목을 클릭하면 자세한 내용이 여기에 표시됩니다.</div>
+      <div id="dt-meta"></div>
+      <div id="dt-tags"></div>
+      <div id="dt-img"></div>
+    </article>
+  </section>
+
 </div>
 
-<!-- Navigation -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">한<span>승연</span></a>
-  <ul class="nav-links">
-    <li><a href="#about" id="nav-about">소개</a></li>
-    <li><a href="#education" id="nav-edu">학력</a></li>
-    <li><a href="#achievements" id="nav-ach">수상 &amp; 활동</a></li>
-    <li><a href="#vision" id="nav-vis">비전</a></li>
-  </ul>
-</nav>
-
-<!-- Hero -->
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">🌿 Green Smart City · 상명대학교 천안캠퍼스</div>
-    <h1 class="hero-name">한승연</h1>
-    <p class="hero-en">Han Seung Yeon</p>
-    <div class="hero-divider"></div>
-    <p class="hero-subtitle">
-      도시와 자연이 공존하는 미래를 설계합니다.<br />
-      <strong>그린스마트시티학과</strong>에서 지속 가능한 도시 솔루션을 연구합니다.
-    </p>
-    <div class="hero-cta">
-      <a href="#achievements" class="btn btn-primary" id="cta-achievements">🏆 수상 &amp; 활동 보기</a>
-      <a href="#about" class="btn btn-outline" id="cta-about">👤 자세히 알아보기</a>
-    </div>
-  </div>
-  <div class="scroll-hint">
-    <span>스크롤</span>
-    <div class="scroll-hint-line"></div>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag">About Me</div>
-      <h2 class="section-title">나를 소개합니다</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-visual reveal">
-        <div class="avatar-ring">
-          <div class="avatar-core">승</div>
-        </div>
-      </div>
-      <div class="about-info reveal">
-        <h3>안녕하세요, 한승연입니다 👋</h3>
-        <p>
-          상명대학교 천안캠퍼스 그린스마트시티학과에 재학 중입니다.
-          지속 가능한 도시 환경과 스마트 기술의 융합에 관심을 가지고,
-          다양한 학술 활동과 공모전을 통해 실력을 키워가고 있습니다.
-        </p>
-        <ul class="info-list">
-          <li>
-            <span class="label">이름</span>
-            <span class="value">한승연</span>
-          </li>
-          <li>
-            <span class="label">생년월일</span>
-            <span class="value">2005년 2월 14일</span>
-          </li>
-          <li>
-            <span class="label">소속</span>
-            <span class="value">상명대학교 천안캠퍼스<br />그린스마트시티학과 24학번</span>
-          </li>
-          <li>
-            <span class="label">이메일</span>
-            <span class="value"><a href="mailto:mos2005@naver.com" style="color: inherit; text-decoration: none; border-bottom: 1px dashed var(--green-accent);">mos2005@naver.com</a></span>
-          </li>
-          <li>
-            <span class="label">관심 분야</span>
-            <span class="value">도시 숲 · 스마트 시티 · 지속가능 도시 설계</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Education -->
-<section id="education">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag">Education</div>
-      <h2 class="section-title">학력 사항</h2>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-period">2024 ~ 현재</div>
-          <div class="timeline-title">상명대학교 천안캠퍼스</div>
-          <div class="timeline-sub">그린스마트시티학과 · 24학번</div>
-        </div>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-period">수원시</div>
-          <div class="timeline-title">수일고등학교 졸업</div>
-          <div class="timeline-sub">Suwon Suil High School</div>
-        </div>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-period">수원시</div>
-          <div class="timeline-title">수원북중학교 졸업</div>
-          <div class="timeline-sub">Suwon Bukbu Middle School</div>
-        </div>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-period">수원시</div>
-          <div class="timeline-title">영화초등학교 졸업</div>
-          <div class="timeline-sub">Suwon Yeonghwa Elementary School</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Achievements -->
-<section id="achievements">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag">Awards &amp; Activities</div>
-      <h2 class="section-title">수상 &amp; 활동 내역</h2>
-    </div>
-    <div class="awards-grid">
-      <div class="award-card reveal" id="award-1">
-        <div class="award-icon">🥇</div>
-        <div class="award-year">2025</div>
-        <div class="award-title">상명대학교 그린스마트시티학과<br />제2회 교내공모전 대상</div>
-        <div class="award-desc">학과 내 역량을 발휘한 공모전에서 대상을 수상하며 전문성을 인정받았습니다.</div>
-        <span class="award-badge badge-gold">🏆 대상 (Grand Prize)</span>
-      </div>
-      <div class="award-card reveal" id="award-2">
-        <div class="award-icon">👑</div>
-        <div class="award-year">2026</div>
-        <div class="award-title">그린스마트시티학과 부학회장 임명</div>
-        <div class="award-desc">학과 학생회 부학회장으로 임명되어 학과 구성원들을 대표하고 학과 발전에 기여하고 있습니다.</div>
-        <span class="award-badge badge-leader">🌿 부학회장</span>
-      </div>
-      <div class="award-card reveal" id="award-3">
-        <div class="award-icon">🥇</div>
-        <div class="award-year">2026</div>
-        <div class="award-title">춘계학술대회 대상</div>
-        <div class="award-desc">학술적 연구 성과를 발표하여 춘계학술대회에서 대상을 수상하였습니다.</div>
-        <span class="award-badge badge-gold">🏆 대상 (Grand Prize)</span>
-      </div>
-      <div class="award-card reveal" id="award-4">
-        <div class="award-img-wrap" onclick="openLightbox('도시숲_full.jpg','2026 도시숲설계공모대전 · 품앗이 팀 출품작')">
-          <img src="도시숲_thumb.jpg" alt="도시숲설계공모대전 품앗이 패널" loading="lazy" />
-          <div class="award-img-overlay">🔍 클릭하면 크게 볼 수 있어요</div>
-        </div>
-        <div class="award-icon">🌳</div>
-        <div class="award-year">2026</div>
-        <div class="award-title">도시숲 공모전 참가</div>
-        <div class="award-desc">「품앗이」를 주제로 도시와 숲, 사람의 품이 이어지는 지속 가능한 도시숲 설계안을 제안하였습니다.</div>
-        <span class="award-badge badge-green">🌿 참가</span>
-      </div>
-      <div class="award-card reveal" id="award-5">
-        <div class="award-img-wrap" onclick="openLightbox('스마트공원_full.jpg','스마트공원 판넬 · 수업 프로젝트')">
-          <img src="스마트공원_thumb.jpg" alt="스마트공원 판넬" loading="lazy" />
-          <div class="award-img-overlay">🔍 클릭하면 크게 볼 수 있어요</div>
-        </div>
-        <div class="award-icon">🌿</div>
-        <div class="award-year">수업 프로젝트</div>
-        <div class="award-title">스마트공원 판넬</div>
-        <div class="award-desc">「명동[明動]」— 사람들의 발걸음으로 다시금 천안길을 밝히다. 수업에서 팀원들과 함께 스마트공원 설계안을 제작하였습니다.</div>
-        <span class="award-badge badge-leader">📐 수업 프로젝트</span>
-      </div>
-      <div class="award-card reveal" id="award-6">
-        <div class="award-icon">🎓</div>
-        <div class="award-year">2026</div>
-        <div class="award-title">Summer School 수료</div>
-        <div class="award-desc">전문 Summer School 프로그램을 성공적으로 수료하였습니다.</div>
-        <span class="award-badge badge-green">✅ 수료</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Vision -->
-<section id="vision">
-  <div class="container">
-    <div class="vision-card reveal">
-      <div class="vision-icon">🌏</div>
-      <h3>지속 가능한 미래 도시를 위해</h3>
-      <p>
-        그린스마트시티학과에서 쌓은 지식과 공모전·학술 활동의 경험을 바탕으로,
-        자연과 기술이 조화롭게 공존하는 스마트하고 친환경적인 도시 환경을
-        만드는 데 기여하고 싶습니다. 작은 실천이 도시를 바꿀 수 있다고 믿습니다.
-      </p>
-      <a href="mailto:mos2005@naver.com" class="btn btn-primary" id="cta-contact">✉️ 이메일 보내기 (mos2005@naver.com)</a>
-    </div>
-  </div>
-</section>
-
-<!-- Lightbox -->
+<!-- ───────────────  LIGHTBOX  ─────────────── -->
 <div id="lightbox">
   <div class="lb-toolbar">
     <span class="lb-caption" id="lb-caption-text"></span>
-    <div style="display:flex;gap:0.5rem;align-items:center">
-      <button class="lb-btn" onclick="lb_resetZoom()">🔄 원래 크기</button>
-      <button class="lb-close-btn" onclick="closeLightbox()" aria-label="닫기">✕</button>
-    </div>
+    <button class="lb-close-btn" onclick="closeLightbox()">✕ 닫기</button>
   </div>
-  <div class="lb-spinner"></div>
   <div class="lb-viewport" id="lb-viewport">
     <img id="lb-img" src="" alt="" />
   </div>
   <div class="lb-zoom-bar">
     <button onclick="lb_zoom(-0.25)" title="축소">−</button>
-    <span id="lb-zoom-pct">100%</span>
+    <button id="lb-zoom-pct" onclick="lb_reset()" title="화면에 맞추기">100%</button>
     <button onclick="lb_zoom(+0.25)" title="확대">+</button>
   </div>
 </div>
 
-<!-- Footer -->
-<footer>
-  <p>© 2026 <span>한승연</span> · 상명대학교 그린스마트시티학과 · Made with 🌿</p>
-</footer>
-
 <script>
-  /* ── Particles ── */
-  const canvas = document.getElementById('particles');
-  const colors = ['#2ecc71','#1abc9c','#52d68a','#27ae60'];
-  for (let i = 0; i < 28; i++) {
-    const p = document.createElement('div');
-    const size = Math.random() * 5 + 2;
-    p.className = 'particle';
-    Object.assign(p.style, {
-      width: size + 'px',
-      height: size + 'px',
-      left: Math.random() * 100 + '%',
-      background: colors[Math.floor(Math.random() * colors.length)],
-      '--dur': (Math.random() * 10 + 7) + 's',
-      '--delay': (Math.random() * 8) + 's',
-      '--op': (Math.random() * 0.3 + 0.1).toFixed(2),
-    });
-    canvas.appendChild(p);
+const ITEMS = [
+  {
+    id: 'award-1', name: '교내공모전 대상',
+    icon: '🏆', iconColor: 'blue',
+    category: 'award', categoryLabel: '수상',
+    year: '2025', status: '대상', statusClass: 'chip-gold',
+    desc: '상명대학교 그린스마트시티학과 제2회 교내공모전에서 대상을 수상하였습니다. 학과 내 역량을 발휘한 공모전에서 전문성을 인정받았습니다.',
+    tags: ['그린스마트시티', '수상', '공모전'], img: null
+  },
+  {
+    id: 'award-3', name: '춘계학술대회 대상',
+    icon: '🎓', iconColor: 'green',
+    category: 'award', categoryLabel: '수상',
+    year: '2026', status: '대상', statusClass: 'chip-gold',
+    desc: '학술적 연구 성과를 발표하여 춘계학술대회에서 대상을 수상하였습니다.',
+    tags: ['학술대회', '수상', '연구'], img: null
+  },
+  {
+    id: 'award-2', name: '부학회장 임명',
+    icon: '👑', iconColor: 'teal',
+    category: 'activity', categoryLabel: '활동',
+    year: '2026', status: '임명', statusClass: 'chip-ink',
+    desc: '그린스마트시티학과 학생회 부학회장으로 임명되어 학과 구성원들을 대표하고 학과 발전에 기여하고 있습니다.',
+    tags: ['학생회', '리더십', '부학회장'], img: null
+  },
+  {
+    id: 'award-4', name: '도시숲 공모전 출품',
+    icon: '🌳', iconColor: 'amber',
+    category: 'project', categoryLabel: '프로젝트',
+    year: '2026', status: '참가', statusClass: '',
+    desc: '「품앗이」를 주제로 도시와 숲, 사람의 품이 이어지는 지속 가능한 도시숲 설계안을 제안하였습니다.',
+    tags: ['도시숲', '설계', '품앗이'],
+    img: { thumb: '도시숲_thumb.jpg', full: '도시숲_full.jpg', caption: '2026 도시숲설계공모대전 · 품앗이 팀 출품작' }
+  },
+  {
+    id: 'award-5', name: '스마트공원 판넬',
+    icon: '🌿', iconColor: 'green',
+    category: 'project', categoryLabel: '프로젝트',
+    year: '수업 프로젝트', status: '수업', statusClass: '',
+    desc: '「명동[明動]」— 사람들의 발걸음으로 다시금 천안길을 밝히다. 팀원들과 함께 스마트공원 설계안을 제작하였습니다.',
+    tags: ['스마트공원', '설계', '팀프로젝트'],
+    img: { thumb: '스마트공원_thumb.jpg', full: '스마트공원_full.jpg', caption: '스마트공원 판넬 · 수업 프로젝트' }
+  },
+  {
+    id: 'award-6', name: 'Summer School 수료',
+    icon: '🎓', iconColor: 'blue',
+    category: 'activity', categoryLabel: '활동',
+    year: '2026', status: '수료', statusClass: '',
+    desc: '전문 Summer School 프로그램을 성공적으로 수료하였습니다.',
+    tags: ['Summer School', '수료', '교육'], img: null
+  },
+];
+
+let selectedId = null;
+
+/* ─────────────  LIST  ───────────── */
+function renderList(items) {
+  const box = document.getElementById('list');
+  box.innerHTML = '';
+  if (!items.length) {
+    box.innerHTML = '<div class="list-empty">해당하는 항목이 없습니다.</div>';
+    return;
   }
-
-  /* ── Lightbox ── */
-  let lbScale = 1;
-  const LB_MIN = 0.25, LB_MAX = 4;
-
-  function openLightbox(src, caption) {
-    const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lb-img');
-    document.getElementById('lb-caption-text').textContent = caption;
-    lb.classList.add('open', 'loading-state');
-    img.classList.add('loading');
-    document.body.style.overflow = 'hidden';
-    lbScale = 1;
-    img.style.transform = 'scale(1)';
-    document.getElementById('lb-zoom-pct').textContent = '100%';
-    img.onload = () => {
-      lb.classList.remove('loading-state');
-      img.classList.remove('loading');
-    };
-    img.src = src;
-  }
-
-  function closeLightbox() {
-    const lb = document.getElementById('lightbox');
-    lb.classList.remove('open', 'loading-state');
-    document.getElementById('lb-img').src = '';
-    document.body.style.overflow = '';
-  }
-
-  function lb_zoom(delta) {
-    lbScale = Math.min(LB_MAX, Math.max(LB_MIN, lbScale + delta));
-    document.getElementById('lb-img').style.transform = `scale(${lbScale})`;
-    document.getElementById('lb-zoom-pct').textContent = Math.round(lbScale * 100) + '%';
-  }
-
-  function lb_resetZoom() {
-    lbScale = 1;
-    document.getElementById('lb-img').style.transform = 'scale(1)';
-    document.getElementById('lb-zoom-pct').textContent = '100%';
-    document.getElementById('lb-viewport').scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  }
-
-  /* Wheel zoom */
-  document.getElementById('lb-viewport').addEventListener('wheel', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    e.preventDefault();
-    lb_zoom(e.deltaY < 0 ? 0.15 : -0.15);
-  }, { passive: false });
-
-  /* Click outside (toolbar/zoom-bar excluded) to close */
-  document.getElementById('lb-viewport').addEventListener('click', e => {
-    if (e.target === document.getElementById('lb-viewport')) closeLightbox();
+  items.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'lrow' + (item.id === selectedId ? ' on' : '');
+    btn.id = 'row-' + item.id;
+    btn.onclick = () => selectItem(item.id);
+    btn.innerHTML = `
+      <span class="lrow-ic">${item.icon}</span>
+      <span class="lrow-main">
+        <span class="lrow-name">${item.name}</span>
+        <span class="lrow-sub">${item.categoryLabel} · ${item.year}</span>
+      </span>
+      <span class="chip ${item.statusClass}">${item.status}</span>
+      <span class="lrow-go">↗</span>
+    `;
+    box.appendChild(btn);
   });
+}
 
-  /* Keyboard shortcuts */
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === '+' || e.key === '=') lb_zoom(0.25);
-    if (e.key === '-') lb_zoom(-0.25);
-    if (e.key === '0') lb_resetZoom();
-  });
+/* ─────────────  SELECT  ───────────── */
+function selectItem(id) {
+  selectedId = id;
 
-  /* ── Scroll Reveal ── */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
+  document.querySelectorAll('.lrow').forEach(r => r.classList.remove('on'));
+  const row = document.getElementById('row-' + id);
+  if (row) row.classList.add('on');
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.qa').forEach(c => c.classList.remove('active'));
+  const qa = document.getElementById('qa-' + id);
+  if (qa) qa.classList.add('active');
 
-  /* ── Navbar shadow on scroll ── */
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    nav.style.boxShadow = window.scrollY > 40
-      ? '0 4px 30px rgba(0,0,0,0.4)'
-      : 'none';
-  });
+  const item = ITEMS.find(i => i.id === id);
+  if (!item) return;
+
+  document.getElementById('dt-cat').textContent = item.categoryLabel;
+  document.getElementById('dt-title').textContent = item.name;
+  document.getElementById('dt-desc').textContent = item.desc;
+
+  document.getElementById('dt-meta').innerHTML = `
+    <div class="dt-meta">
+      <div class="info-row"><span class="label">연도</span><span class="value">${item.year}</span></div>
+      <div class="info-row"><span class="label">분류</span><span class="value">${item.categoryLabel}</span></div>
+      <div class="info-row"><span class="label">상태</span><span class="value"><span class="chip ${item.statusClass}">${item.status}</span></span></div>
+    </div>
+  `;
+
+  document.getElementById('dt-tags').innerHTML =
+    '<div class="tags-row">' + item.tags.map(t => `<span class="tag">${t}</span>`).join('') + '</div>';
+
+  const imgEl = document.getElementById('dt-img');
+  if (item.img) {
+    imgEl.innerHTML = `
+      <div class="dt-thumb" onclick="openLightbox('${item.img.full}','${item.img.caption}')">
+        <img src="${item.img.thumb}" alt="${item.name}" loading="lazy"/>
+      </div>
+      <div class="dt-hint">클릭하여 크게 보기</div>
+    `;
+  } else {
+    imgEl.innerHTML = '';
+  }
+}
+
+/* ─────────────  FILTERS  ───────────── */
+const CAT_LABELS = { all: '전체 활동', recent: '최근 활동', award: '수상', project: '프로젝트', activity: '활동' };
+
+function clearChips() {
+  document.querySelectorAll('.fchip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+}
+
+function filterCategory(cat) {
+  clearChips();
+  const chip = document.getElementById('f-' + cat);
+  if (chip) chip.classList.add('active');
+  const nav = document.getElementById('nav-' + cat);
+  if (nav) nav.classList.add('active');
+
+  let filtered = ITEMS;
+  if (cat === 'recent') filtered = ITEMS.slice(0, 3);
+  else if (cat !== 'all') filtered = ITEMS.filter(i => i.category === cat);
+
+  document.getElementById('list-sub').textContent =
+    (CAT_LABELS[cat] || cat) + ' · ' + filtered.length + '건';
+  renderList(filtered);
+}
+
+function filterTag(tag) {
+  clearChips();
+  const chip = document.getElementById('t-' + tag);
+  if (chip) chip.classList.add('active');
+
+  const filtered = ITEMS.filter(i => i.tags.includes(tag));
+  document.getElementById('list-sub').textContent = '#' + tag + ' · ' + filtered.length + '건';
+  renderList(filtered);
+}
+
+function scrollToContact() {
+  document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* ─────────────  LIGHTBOX  ───────────── */
+const lbEl   = document.getElementById('lightbox');
+const lbImg  = document.getElementById('lb-img');
+const lbView = document.getElementById('lb-viewport');
+const lbPct  = document.getElementById('lb-zoom-pct');
+
+let lbScale = 1;   // 1 = 화면에 맞춘 크기
+let lbFitW  = 0;   // 화면에 맞췄을 때의 실제 렌더 너비(px)
+
+function lbIsOpen() { return lbEl.classList.contains('open'); }
+
+/* 배율 1일 때의 렌더 너비를 측정해 둔다 */
+function lbMeasure() {
+  lbImg.style.width = '';
+  lbImg.style.maxWidth = '';
+  lbImg.style.maxHeight = '';
+  lbFitW = lbImg.getBoundingClientRect().width;
+}
+
+/* transform 대신 실제 width를 바꿔야 확대 후에도 스크롤로 전체를 볼 수 있다 */
+function lbApply() {
+  lbPct.textContent = Math.round(lbScale * 100) + '%';
+  if (lbScale === 1 || !lbFitW) {
+    lbImg.style.width = '';
+    lbImg.style.maxWidth = '';
+    lbImg.style.maxHeight = '';
+  } else {
+    lbImg.style.maxWidth = 'none';
+    lbImg.style.maxHeight = 'none';
+    lbImg.style.width = Math.round(lbFitW * lbScale) + 'px';
+  }
+}
+
+function openLightbox(src, caption) {
+  document.getElementById('lb-caption-text').textContent = caption;
+  lbEl.classList.add('open');
+  lbImg.classList.add('loading');
+  document.body.style.overflow = 'hidden';
+  lbScale = 1; lbFitW = 0;
+  lbApply();
+  lbImg.onload = () => {
+    lbImg.classList.remove('loading');
+    lbMeasure();
+    lbApply();
+  };
+  lbImg.src = src;
+}
+
+function closeLightbox() {
+  lbEl.classList.remove('open');
+  lbImg.src = '';
+  document.body.style.overflow = '';
+}
+
+function lb_zoom(delta) {
+  if (!lbFitW) return;
+  const prev = lbScale;
+  lbScale = Math.min(6, Math.max(0.25, Math.round((lbScale + delta) * 100) / 100));
+  if (lbScale === prev) return;
+
+  /* 확대/축소 후에도 보고 있던 지점이 화면 중앙에 남도록 스크롤 보정 */
+  const cx = (lbView.scrollLeft + lbView.clientWidth  / 2) / Math.max(1, lbView.scrollWidth);
+  const cy = (lbView.scrollTop  + lbView.clientHeight / 2) / Math.max(1, lbView.scrollHeight);
+  lbApply();
+  lbView.scrollLeft = cx * lbView.scrollWidth  - lbView.clientWidth  / 2;
+  lbView.scrollTop  = cy * lbView.scrollHeight - lbView.clientHeight / 2;
+}
+
+function lb_reset() {
+  lbScale = 1;
+  lbApply();
+}
+
+/* 창 크기가 바뀌면 맞춤 너비를 다시 잰다 */
+window.addEventListener('resize', () => {
+  if (!lbIsOpen() || !lbImg.src) return;
+  const keep = lbScale;
+  lbScale = 1; lbMeasure();
+  lbScale = keep; lbApply();
+});
+
+/* 휠 = 확대/축소 */
+lbView.addEventListener('wheel', e => {
+  if (!lbIsOpen()) return;
+  e.preventDefault();
+  lb_zoom(e.deltaY < 0 ? 0.15 : -0.15);
+}, { passive: false });
+
+/* 드래그로 이동 (확대 상태에서 유용) */
+let lbDrag = null;
+lbView.addEventListener('pointerdown', e => {
+  if (e.button !== 0) return;
+  /* 포인터 캡처 이후에는 e.target이 뷰포트로 바뀌므로 원래 대상을 여기서 기억해 둔다 */
+  lbDrag = {
+    x: e.clientX, y: e.clientY,
+    sl: lbView.scrollLeft, st: lbView.scrollTop,
+    moved: false, target: e.target
+  };
+  lbView.setPointerCapture(e.pointerId);
+});
+lbView.addEventListener('pointermove', e => {
+  if (!lbDrag) return;
+  const dx = e.clientX - lbDrag.x, dy = e.clientY - lbDrag.y;
+  if (!lbDrag.moved && Math.abs(dx) + Math.abs(dy) > 4) {
+    lbDrag.moved = true;
+    lbView.classList.add('dragging');
+  }
+  if (!lbDrag.moved) return;
+  lbView.scrollLeft = lbDrag.sl - dx;
+  lbView.scrollTop  = lbDrag.st - dy;
+});
+lbView.addEventListener('pointerup', () => {
+  const d = lbDrag;
+  lbDrag = null;
+  lbView.classList.remove('dragging');
+  /* 이미지 바깥 여백을 "클릭"했을 때만 닫는다 (드래그·이미지 클릭은 제외) */
+  if (d && !d.moved && d.target === lbView) closeLightbox();
+});
+lbView.addEventListener('pointercancel', () => {
+  lbDrag = null;
+  lbView.classList.remove('dragging');
+});
+
+document.addEventListener('keydown', e => {
+  if (!lbIsOpen()) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === '+' || e.key === '=') lb_zoom(0.25);
+  if (e.key === '-' || e.key === '_') lb_zoom(-0.25);
+  if (e.key === '0') lb_reset();
+});
+
+/* ─────────────  INIT  ───────────── */
+filterCategory('all');
 </script>
 </body>
 </html>
