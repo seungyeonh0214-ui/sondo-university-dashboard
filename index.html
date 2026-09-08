@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>한승연 | Green Smart City</title>
+  <meta name="description" content="상명대학교 천안캠퍼스 그린스마트시티학과 한승연의 포트폴리오 및 자기소개 페이지입니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green-deep: #0d2b1a;
+      --green-dark: #143d27;
+      --green-mid: #1e5c3a;
+      --green-accent: #2ecc71;
+      --green-light: #52d68a;
+      --green-glow: #27ae60;
+      --teal: #1abc9c;
+      --white: #ffffff;
+      --off-white: #f0faf4;
+      --text-muted: #8ab8a0;
+      --card-bg: rgba(30, 92, 58, 0.25);
+      --card-border: rgba(46, 204, 113, 0.2);
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: var(--green-deep);
+      color: var(--white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── BACKGROUND ── */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(46,204,113,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(26,188,156,0.10) 0%, transparent 60%),
+        linear-gradient(160deg, #0a1f11 0%, #0d2b1a 40%, #091a10 100%);
+    }
+
+    .particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: float-up var(--dur, 8s) var(--delay, 0s) infinite ease-in-out;
+    }
+
+    @keyframes float-up {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: var(--op, 0.4); }
+      90%  { opacity: var(--op, 0.4); }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(13, 43, 26, 0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(46,204,113,0.12);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--green-accent);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--white); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--green-accent);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--green-accent); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .hero-inner { max-width: 800px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(46,204,113,0.12);
+      border: 1px solid rgba(46,204,113,0.3);
+      border-radius: 999px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.8rem;
+      color: var(--green-light);
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      animation: fade-in 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green-accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero-name {
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 30%, var(--green-light) 70%, var(--teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fade-up 0.9s 0.15s ease both;
+    }
+
+    .hero-en {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      animation: fade-up 0.9s 0.25s ease both;
+    }
+
+    .hero-divider {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--green-accent), var(--teal));
+      margin: 1.8rem auto;
+      border-radius: 2px;
+      animation: expand 0.9s 0.35s ease both;
+    }
+
+    @keyframes expand {
+      from { width: 0; opacity: 0; }
+      to   { width: 60px; opacity: 1; }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+      animation: fade-up 0.9s 0.45s ease both;
+    }
+    .hero-subtitle strong { color: var(--green-light); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+      animation: fade-up 0.9s 0.55s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green-accent), var(--teal));
+      color: var(--green-deep);
+      border: none;
+      box-shadow: 0 0 30px rgba(46,204,113,0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 45px rgba(46,204,113,0.55);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--green-light);
+      border: 1.5px solid rgba(46,204,113,0.4);
+    }
+    .btn-outline:hover {
+      background: rgba(46,204,113,0.08);
+      border-color: var(--green-accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      animation: fade-in 1s 1.2s ease both;
+    }
+
+    .scroll-hint-line {
+      width: 1.5px; height: 40px;
+      background: linear-gradient(to bottom, var(--green-accent), transparent);
+      animation: scroll-line 2s infinite;
+    }
+
+    @keyframes scroll-line {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-header { text-align: center; margin-bottom: 4rem; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 50%, var(--green-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: linear-gradient(180deg, transparent, rgba(20,61,39,0.3), transparent);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-visual { display: flex; justify-content: center; }
+
+    .avatar-ring {
+      position: relative;
+      width: 260px; height: 260px;
+    }
+
+    .avatar-ring::before, .avatar-ring::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      animation: spin-ring 8s linear infinite;
+    }
+
+    .avatar-ring::before {
+      inset: -8px;
+      border: 2px solid transparent;
+      background: linear-gradient(var(--green-deep), var(--green-deep)) padding-box,
+                  linear-gradient(135deg, var(--green-accent), transparent, var(--teal)) border-box;
+    }
+
+    .avatar-ring::after {
+      inset: -20px;
+      border: 1px solid transparent;
+      background: linear-gradient(var(--green-deep), var(--green-deep)) padding-box,
+                  linear-gradient(225deg, var(--green-accent), transparent, var(--teal)) border-box;
+      animation-duration: 12s;
+      animation-direction: reverse;
+    }
+
+    @keyframes spin-ring {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .avatar-core {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      font-weight: 900;
+      color: var(--green-accent);
+      letter-spacing: -0.05em;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 60px rgba(46,204,113,0.2), inset 0 0 40px rgba(0,0,0,0.3);
+    }
+
+    .about-info h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .about-info p {
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      list-style: none;
+    }
+
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .info-list .label {
+      min-width: 80px;
+      color: var(--green-accent);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      padding-top: 1px;
+    }
+
+    .info-list .value {
+      color: var(--off-white);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* ── EDUCATION ── */
+    #education { padding-top: 4rem; }
+
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 9px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--green-accent), var(--teal), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 0.4rem;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--green-deep);
+      border: 2.5px solid var(--green-accent);
+      box-shadow: 0 0 12px rgba(46,204,113,0.4);
+      transition: all 0.3s;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--green-accent);
+      box-shadow: 0 0 20px rgba(46,204,113,0.7);
+    }
+
+    .timeline-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      border-color: rgba(46,204,113,0.45);
+      transform: translateX(5px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+
+    .timeline-period {
+      font-size: 0.75rem;
+      color: var(--green-accent);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements {
+      background: linear-gradient(180deg, transparent, rgba(20,61,39,0.2), transparent);
+    }
+
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .award-card {
+      background: var(--glass);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: all 0.35s ease;
+      cursor: default;
+    }
+
+    .award-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(46,204,113,0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .award-card:hover {
+      border-color: rgba(46,204,113,0.5);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(46,204,113,0.1);
+    }
+
+    .award-card:hover::before { opacity: 1; }
+
+    .award-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+
+    /* ── AWARD IMAGE ── */
+    .award-img-wrap {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      aspect-ratio: 16 / 10;
+      cursor: pointer;
+      position: relative;
+      background: rgba(20,61,39,0.4);
+    }
+
+    .award-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .award-img-wrap:hover img { transform: scale(1.04); }
+
+    .award-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,43,26,0.75) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1rem;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .award-img-wrap:hover .award-img-overlay { opacity: 1; }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(12px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open { display: flex; }
+
+    .lb-toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+      z-index: 2;
+    }
+
+    .lb-caption {
+      font-size: 0.9rem;
+      color: var(--green-light);
+      font-weight: 500;
+    }
+
+    .lb-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.45rem 1rem;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .lb-btn:hover { background: rgba(255,255,255,0.18); }
+
+    .lb-close-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+
+    .lb-close-btn:hover { background: rgba(220,50,50,0.4); }
+
+    .lb-viewport {
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .lb-viewport.grabbing { cursor: grabbing; }
+
+    #lb-img {
+      max-width: none;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+      transition: opacity 0.3s ease;
+      transform-origin: center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #lb-img.loading { opacity: 0; }
+
+    .lb-spinner {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px; height: 44px;
+      border: 3px solid rgba(46,204,113,0.2);
+      border-top-color: var(--green-accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    #lightbox.loading-state .lb-spinner { display: block; }
+
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .lb-zoom-bar {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .lb-zoom-bar button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lb-zoom-bar button:hover { background: rgba(255,255,255,0.15); }
+
+    #lb-zoom-pct {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      min-width: 44px;
+      text-align: center;
+    }
+
+    .award-year {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--green-accent);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .award-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .award-desc {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .award-badge {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-gold {
+      background: rgba(255, 215, 0, 0.12);
+      color: #ffd700;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    .badge-green {
+      background: rgba(46,204,113,0.12);
+      color: var(--green-light);
+      border: 1px solid rgba(46,204,113,0.3);
+    }
+
+    .badge-leader {
+      background: rgba(26,188,156,0.15);
+      color: #1abc9c;
+      border: 1px solid rgba(26,188,156,0.4);
+    }
+
+    /* ── VISION ── */
+    #vision { padding-bottom: 8rem; }
+
+    .vision-card {
+      background: linear-gradient(135deg, rgba(30,92,58,0.4), rgba(13,43,26,0.6));
+      border: 1px solid rgba(46,204,113,0.25);
+      border-radius: 28px;
+      padding: 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(15px);
+    }
+
+    .vision-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(ellipse, rgba(46,204,113,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .vision-icon { font-size: 3.5rem; margin-bottom: 1.5rem; }
+
+    .vision-card h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #fff, var(--green-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .vision-card p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 2;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-weight: 300;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 1px solid rgba(46,204,113,0.1);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    footer span { color: var(--green-accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; text-align: center; }
+      .about-visual { margin-bottom: 2rem; }
+      .avatar-ring { width: 200px; height: 200px; }
+      .vision-card { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-canvas">
+  <div class="particles" id="particles"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">한<span>승연</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" id="nav-about">소개</a></li>
+    <li><a href="#education" id="nav-edu">학력</a></li>
+    <li><a href="#achievements" id="nav-ach">수상 &amp; 활동</a></li>
+    <li><a href="#vision" id="nav-vis">비전</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌿 Green Smart City · 상명대학교 천안캠퍼스</div>
+    <h1 class="hero-name">한승연</h1>
+    <p class="hero-en">Han Seung Yeon</p>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">
+      도시와 자연이 공존하는 미래를 설계합니다.<br />
+      <strong>그린스마트시티학과</strong>에서 지속 가능한 도시 솔루션을 연구합니다.
+    </p>
+    <div class="hero-cta">
+      <a href="#achievements" class="btn btn-primary" id="cta-achievements">🏆 수상 &amp; 활동 보기</a>
+      <a href="#about" class="btn btn-outline" id="cta-about">👤 자세히 알아보기</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>스크롤</span>
+    <div class="scroll-hint-line"></div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">About Me</div>
+      <h2 class="section-title">나를 소개합니다</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="avatar-ring">
+          <div class="avatar-core">승</div>
+        </div>
+      </div>
+      <div class="about-info reveal">
+        <h3>안녕하세요, 한승연입니다 👋</h3>
+        <p>
+          상명대학교 천안캠퍼스 그린스마트시티학과에 재학 중입니다.
+          지속 가능한 도시 환경과 스마트 기술의 융합에 관심을 가지고,
+          다양한 학술 활동과 공모전을 통해 실력을 키워가고 있습니다.
+        </p>
+        <ul class="info-list">
+          <li>
+            <span class="label">이름</span>
+            <span class="value">한승연</span>
+          </li>
+          <li>
+            <span class="label">생년월일</span>
+            <span class="value">2005년 2월 14일</span>
+          </li>
+          <li>
+            <span class="label">소속</span>
+            <span class="value">상명대학교 천안캠퍼스<br />그린스마트시티학과 24학번</span>
+          </li>
+          <li>
+            <span class="label">이메일</span>
+            <span class="value"><a href="mailto:mos2005@naver.com" style="color: inherit; text-decoration: none; border-bottom: 1px dashed var(--green-accent);">mos2005@naver.com</a></span>
+          </li>
+          <li>
+            <span class="label">관심 분야</span>
+            <span class="value">도시 숲 · 스마트 시티 · 지속가능 도시 설계</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Education</div>
+      <h2 class="section-title">학력 사항</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-period">2024 ~ 현재</div>
+          <div class="timeline-title">상명대학교 천안캠퍼스</div>
+          <div class="timeline-sub">그린스마트시티학과 · 24학번</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-period">수원시</div>
+          <div class="timeline-title">수일고등학교 졸업</div>
+          <div class="timeline-sub">Suwon Suil High School</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-period">수원시</div>
+          <div class="timeline-title">수원북중학교 졸업</div>
+          <div class="timeline-sub">Suwon Bukbu Middle School</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-period">수원시</div>
+          <div class="timeline-title">영화초등학교 졸업</div>
+          <div class="timeline-sub">Suwon Yeonghwa Elementary School</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Achievements -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Awards &amp; Activities</div>
+      <h2 class="section-title">수상 &amp; 활동 내역</h2>
+    </div>
+    <div class="awards-grid">
+      <div class="award-card reveal" id="award-1">
+        <div class="award-icon">🥇</div>
+        <div class="award-year">2025</div>
+        <div class="award-title">상명대학교 그린스마트시티학과<br />제2회 교내공모전 대상</div>
+        <div class="award-desc">학과 내 역량을 발휘한 공모전에서 대상을 수상하며 전문성을 인정받았습니다.</div>
+        <span class="award-badge badge-gold">🏆 대상 (Grand Prize)</span>
+      </div>
+      <div class="award-card reveal" id="award-2">
+        <div class="award-icon">👑</div>
+        <div class="award-year">2026</div>
+        <div class="award-title">그린스마트시티학과 부학회장 임명</div>
+        <div class="award-desc">학과 학생회 부학회장으로 임명되어 학과 구성원들을 대표하고 학과 발전에 기여하고 있습니다.</div>
+        <span class="award-badge badge-leader">🌿 부학회장</span>
+      </div>
+      <div class="award-card reveal" id="award-3">
+        <div class="award-icon">🥇</div>
+        <div class="award-year">2026</div>
+        <div class="award-title">춘계학술대회 대상</div>
+        <div class="award-desc">학술적 연구 성과를 발표하여 춘계학술대회에서 대상을 수상하였습니다.</div>
+        <span class="award-badge badge-gold">🏆 대상 (Grand Prize)</span>
+      </div>
+      <div class="award-card reveal" id="award-4">
+        <div class="award-img-wrap" onclick="openLightbox('도시숲_full.jpg','2026 도시숲설계공모대전 · 품앗이 팀 출품작')">
+          <img src="도시숲_thumb.jpg" alt="도시숲설계공모대전 품앗이 패널" loading="lazy" />
+          <div class="award-img-overlay">🔍 클릭하면 크게 볼 수 있어요</div>
+        </div>
+        <div class="award-icon">🌳</div>
+        <div class="award-year">2026</div>
+        <div class="award-title">도시숲 공모전 참가</div>
+        <div class="award-desc">「품앗이」를 주제로 도시와 숲, 사람의 품이 이어지는 지속 가능한 도시숲 설계안을 제안하였습니다.</div>
+        <span class="award-badge badge-green">🌿 참가</span>
+      </div>
+      <div class="award-card reveal" id="award-5">
+        <div class="award-img-wrap" onclick="openLightbox('스마트공원_full.jpg','스마트공원 판넬 · 수업 프로젝트')">
+          <img src="스마트공원_thumb.jpg" alt="스마트공원 판넬" loading="lazy" />
+          <div class="award-img-overlay">🔍 클릭하면 크게 볼 수 있어요</div>
+        </div>
+        <div class="award-icon">🌿</div>
+        <div class="award-year">수업 프로젝트</div>
+        <div class="award-title">스마트공원 판넬</div>
+        <div class="award-desc">「명동[明動]」— 사람들의 발걸음으로 다시금 천안길을 밝히다. 수업에서 팀원들과 함께 스마트공원 설계안을 제작하였습니다.</div>
+        <span class="award-badge badge-leader">📐 수업 프로젝트</span>
+      </div>
+      <div class="award-card reveal" id="award-6">
+        <div class="award-icon">🎓</div>
+        <div class="award-year">2026</div>
+        <div class="award-title">Summer School 수료</div>
+        <div class="award-desc">전문 Summer School 프로그램을 성공적으로 수료하였습니다.</div>
+        <span class="award-badge badge-green">✅ 수료</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vision -->
+<section id="vision">
+  <div class="container">
+    <div class="vision-card reveal">
+      <div class="vision-icon">🌏</div>
+      <h3>지속 가능한 미래 도시를 위해</h3>
+      <p>
+        그린스마트시티학과에서 쌓은 지식과 공모전·학술 활동의 경험을 바탕으로,
+        자연과 기술이 조화롭게 공존하는 스마트하고 친환경적인 도시 환경을
+        만드는 데 기여하고 싶습니다. 작은 실천이 도시를 바꿀 수 있다고 믿습니다.
+      </p>
+      <a href="mailto:mos2005@naver.com" class="btn btn-primary" id="cta-contact">✉️ 이메일 보내기 (mos2005@naver.com)</a>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <div class="lb-toolbar">
+    <span class="lb-caption" id="lb-caption-text"></span>
+    <div style="display:flex;gap:0.5rem;align-items:center">
+      <button class="lb-btn" onclick="lb_resetZoom()">🔄 원래 크기</button>
+      <button class="lb-close-btn" onclick="closeLightbox()" aria-label="닫기">✕</button>
+    </div>
+  </div>
+  <div class="lb-spinner"></div>
+  <div class="lb-viewport" id="lb-viewport">
+    <img id="lb-img" src="" alt="" />
+  </div>
+  <div class="lb-zoom-bar">
+    <button onclick="lb_zoom(-0.25)" title="축소">−</button>
+    <span id="lb-zoom-pct">100%</span>
+    <button onclick="lb_zoom(+0.25)" title="확대">+</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2026 <span>한승연</span> · 상명대학교 그린스마트시티학과 · Made with 🌿</p>
+</footer>
+
+<script>
+  /* ── Particles ── */
+  const canvas = document.getElementById('particles');
+  const colors = ['#2ecc71','#1abc9c','#52d68a','#27ae60'];
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    const size = Math.random() * 5 + 2;
+    p.className = 'particle';
+    Object.assign(p.style, {
+      width: size + 'px',
+      height: size + 'px',
+      left: Math.random() * 100 + '%',
+      background: colors[Math.floor(Math.random() * colors.length)],
+      '--dur': (Math.random() * 10 + 7) + 's',
+      '--delay': (Math.random() * 8) + 's',
+      '--op': (Math.random() * 0.3 + 0.1).toFixed(2),
+    });
+    canvas.appendChild(p);
+  }
+
+  /* ── Lightbox ── */
+  let lbScale = 1;
+  const LB_MIN = 0.25, LB_MAX = 4;
+
+  function openLightbox(src, caption) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lb-img');
+    document.getElementById('lb-caption-text').textContent = caption;
+    lb.classList.add('open', 'loading-state');
+    img.classList.add('loading');
+    document.body.style.overflow = 'hidden';
+    lbScale = 1;
+    img.style.transform = 'scale(1)';
+    document.getElementById('lb-zoom-pct').textContent = '100%';
+    img.onload = () => {
+      lb.classList.remove('loading-state');
+      img.classList.remove('loading');
+    };
+    img.src = src;
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('open', 'loading-state');
+    document.getElementById('lb-img').src = '';
+    document.body.style.overflow = '';
+  }
+
+  function lb_zoom(delta) {
+    lbScale = Math.min(LB_MAX, Math.max(LB_MIN, lbScale + delta));
+    document.getElementById('lb-img').style.transform = `scale(${lbScale})`;
+    document.getElementById('lb-zoom-pct').textContent = Math.round(lbScale * 100) + '%';
+  }
+
+  function lb_resetZoom() {
+    lbScale = 1;
+    document.getElementById('lb-img').style.transform = 'scale(1)';
+    document.getElementById('lb-zoom-pct').textContent = '100%';
+    document.getElementById('lb-viewport').scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
+
+  /* Wheel zoom */
+  document.getElementById('lb-viewport').addEventListener('wheel', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    e.preventDefault();
+    lb_zoom(e.deltaY < 0 ? 0.15 : -0.15);
+  }, { passive: false });
+
+  /* Click outside (toolbar/zoom-bar excluded) to close */
+  document.getElementById('lb-viewport').addEventListener('click', e => {
+    if (e.target === document.getElementById('lb-viewport')) closeLightbox();
+  });
+
+  /* Keyboard shortcuts */
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === '+' || e.key === '=') lb_zoom(0.25);
+    if (e.key === '-') lb_zoom(-0.25);
+    if (e.key === '0') lb_resetZoom();
+  });
+
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Navbar shadow on scroll ── */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 40
+      ? '0 4px 30px rgba(0,0,0,0.4)'
+      : 'none';
+  });
+</script>
+</body>
+</html>
